@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="form-item">
                                         <label  placeholder="Password" for="passwd"></label>
-                                        <input class="form-control" placeholder="Password" type="password" name="passwd" required>
+                                        <input class="form-control" placeholder="Password" type="password" name="password" required>
                                     </div>
                                     <br>
                                     </div>

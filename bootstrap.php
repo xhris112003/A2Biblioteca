@@ -4,9 +4,9 @@
 //Utiliza todas las variables de entorno
 // \ --> clase standar que esta fuera de la carpeta SRC
 //creación de la clase:
-//$dotenv=Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv=Dotenv\Dotenv::createImmutable(__DIR__);
 //cargamos la estructura para poder leer las v.ent
-//$dotenv->load();
+$dotenv->load();
 
 //estas dos linias de arriba serán necesarias si el proyecto esta fuera de replit.
 

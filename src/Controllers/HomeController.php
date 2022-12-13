@@ -11,7 +11,8 @@ final class HomeController{
   public function index(){
     $titol="DAW";
    //primer obtenir dades
-    return view('home',['titol'=>$titol]);
+   
+    return view('header') .view('home');
    // return view();
   }
 

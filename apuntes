@@ -1,0 +1,6 @@
+Crea un objeto dentro de un objeto
+$user->order = new Order();
+
+
+
+relacion con linia descuntuinao --> es una dependencia

@@ -3,18 +3,18 @@
   namespace App;
 
   final class Request{
-    protected $controller;
-    protected $action;
-    protected $method;
-    protected $params;
-    protected $arrURI;
+    protected string $controller;
+    protected string $action;
+    protected string $method;
+    protected string $params;
+    protected array $arrURI;
 
     function __construct(){
       $reqString=htmlentities($_SERVER['REQUEST_URI']);
       $this->arrURI=explode('/',$reqString);
       array_shift($this->arrURI);
-     
-      $this->extractURI();
+      $this->extractURI(); 
+      $this->setMethod(htmlentities($_SERVER['REQUEST_METHOD']));
       //var_dump($this->controller);
       //var_dump($this->action);
       //die;
@@ -54,13 +54,22 @@
                         $this->setAction($this->arrURI[1]);
                     }
                 break;
-                default: // cont. & act & params
+              case 3: // cont. & act & params
                     $this->setController($this->arrURI[0]);
                     $this->setAction($this->arrURI[1]);
-                    
+                    $this->params=($this->arrURI[2]);
                 break;
             }
-            $this->setMethod(\htmlentities($_SERVER['REQUEST_METHOD']));
-
         }
+    
+      public function get($field){
+         if ($this->method=='GET'){
+          return filter_input(INPUT_GET,$field,FILTER_DEFAULT);
+        } else return "";
+      }
+      public function post($field){
+        if ($this->method=='POST'){
+          return filter_input(INPUT_POST,$field,FILTER_DEFAULT);
+        } else return "";
+      }
   }

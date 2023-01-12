@@ -37,12 +37,12 @@
                                 <form class="form-login" action="/auth/signin" method="POST">
                             
                                     <div class="form-item"> 
-                                        <label for="passwd"></label>
+                                        <label for="username"></label>
                                         <input class="form-control" placeholder="Username" type="text" name="username" required>
                                     </div>
                                     <div class="form-item">
                                         <label  placeholder="Password" for="passwd"></label>
-                                        <input class="form-control" placeholder="Password" type="password" name="password" required>
+                                        <input class="form-control" placeholder="Password" type="password" name="passwd" required>
                                     </div>
                                     <br>
                                     </div>
@@ -50,7 +50,7 @@
                                     <button class="btn btn-primary" type="submit">Sign in</button>
                                     </div>
                                     <br>
-                                    <a class="link-primary" href="">No tienes cuenta? Registrate.</a>
+                                    <a class="link-primary" href="/register">No tienes cuenta? Registrate.</a>
                                 </form>
                                 </div>
                                 </main>

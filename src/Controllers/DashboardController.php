@@ -14,23 +14,23 @@ use App\Models\Usuari;
     protected Usuari $user;
     function __construct(Request $request,Session $session){
       parent::__construct($request,$session);
-      $user=new Usuari(Session::get('usuario'));
-      var_dump($user);
-      die;
+      $user=new Usuari(Session::get('user'));
       $this->user=$user;
     }
 
     public function index()
     {
-      $user=Session::get('usuario');
+      $user=Session::get('user');
       //primer obtenir dades
       $llibres=new Llibre();
       $cataleg=$llibres->find(['disponible'=>true]);    
-      return view('dashboard', ['cataleg'=>$cataleg,'usuario'=>$user]); 
+     //$cataleg=$this->qb->select(['*'])->from('llibres')->exec()->fetch();
+      return view('dashboard', ['cataleg'=>$cataleg,'user'=>$user]); 
     }
    function reserva(){
      $id=$this->request->getParams();
      $llibre=(new Llibre())->find(['id'=>$id])[0];
+    
      return view('reserva',['llibre'=>$llibre,
                  'user'=>$this->user]);
    }
@@ -39,9 +39,9 @@ use App\Models\Usuari;
       //crear prèstec
        $id=$this->request->getParams();
        $llibre=(new Llibre())->find(['id'=>$id])[0];
-       $prestec=new Prestec($this->user,$llibre);
-       var_dump($prestec);
-      die;
+     
+       $prestec=new Prestec($this->user, $llibre);
+      
         
     }
     

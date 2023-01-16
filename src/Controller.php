@@ -19,4 +19,7 @@
     public function redirect(string $url){
       header('Location:'.$url);
     }
+    public function error(){
+      return view('error',['error'=>Session::get('error')]);
+    }
   }

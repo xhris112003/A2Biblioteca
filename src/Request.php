@@ -34,6 +34,9 @@
     function setMethod($method){
       $this->method=$method;
     }
+    function getParams(){
+      return $this->params;
+    }
     private function extractURI():void{     
             $length=count($this->arrURI);
            //estudi de casos possibles

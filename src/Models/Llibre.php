@@ -1,67 +1,30 @@
 <?php
 
-namespace App\Models;
+  namespace App\Models;
 
-class Llibre{
+  class Llibre extends Model{
+    private string $isbn;
+    private string $autor;
+    private string $titol;
+    private ? string $edicio;
+  // inserts
+    public function setIsbn($isbn){
+      $this->isbn=$isbn;
+    }
+     public function setAuthor($autor){
+      $this->autor=$autorm;
+    }
+     public function setTitol($titol){
+      $this->titol=$titol;
+    }
+     public function setEdicio($edicio){
+      $this->edicio=$edicio;
+    }
 
-  //si es nulo ponemos un interrogante
-  // ej: private ? string $edicion;
-  private string $isbn;
-  private string $autor;
-  private string $titulo;
-  private string $edicion;
-  private string $formato;
-  private boolean $estado;
-
-  // Setters
-  public function setIsbn($isbn){
-    $this->isbn=$isbn;
+    //select
+    public function getIsbn():string{
+      return $this->isbn;
+    }
+    //......
+    
   }
- public function setAutor($autor){
-    $this->autor=$autor;
-  }
-   public function setTitulo($titulo){
-    $this->titulo=$titulo;
-  }
-
-  public function setEdicion($edicion){
-    $this->edicion=$edicion;
-  }
-
-  public function setFormato($formato){
-    $this->formato=$formato;
-  }
-   public function setEstado($estado){
-    $this->estado=$estado;
-  }
-
-  //select
-
-  public function getIsbn(){
-    return $this->isbn;
-  }
-
-  public function getAutor(){
-    return $this->autor;
-  }
-
-  public function getTitulo(){
-    return $this->titulo;
-  }
-
-  public function getEdicion(){
-    return $this->isbn;
-  }
-  public function getEdicion(){
-    return $this->isbn;
-  }
-  public function getFormato(){
-    return $this->formato;
-  }
-   public function getEstado(){
-    return $this->estado;
-  }
-  
-
-  
-}

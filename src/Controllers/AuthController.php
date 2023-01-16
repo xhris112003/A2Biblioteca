@@ -55,19 +55,18 @@
     }
     
     function signup(){
-      $username=$this->request->post('username'); 
       $email=$this->request->post('email');   
       $passwd=$this->request->post('passwd');
+      $username=$this->request->post('username');
       $password=password_hash($passwd,PASSWORD_BCRYPT,['cost'=>4]);
       $rol_id='2';
-      $data=['username'=>$username,
-        'email'=>$email,
+      $data=['email'=>$email,
+        'username'=>$username,
         'passwd'=>$password,
         'rol_id'=>$rol_id];
-      
       $user=new Usuari($data);
       //persist on DB
-    
+      
         if($user->persist()){
           $this->redirect('/');
         };

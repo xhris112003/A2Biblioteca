@@ -1,8 +1,8 @@
 <?php
   //en replit comentem perque treballem amb secrets
   //
-  //$dotenv=\Dotenv\Dotenv::createImmutable(__DIR__):
-  //$dotenv->load();
+  $dotenv=\Dotenv\Dotenv::createImmutable(__DIR__);
+  $dotenv->load();
 
   use App\Container;
   use App\Database\QueryBuilder;

@@ -27,14 +27,32 @@
                         <a class="dropdown-item text-center" href="#">Profile</a>
                         <a class="dropdown-item text-center" href="auth/logout" >Logout</a>
                         <?php if ($_SESSION['user']->rol_id == 1){?>
-                        <a class="dropdown-item text-center hidden" href="" >Admin Profile</a>
+                        <a class="dropdown-item text-center hidden" href="/list" >Admin Profile</a>
                         <?}?>
                     </div>
                 </li>
             </ul>
     </nav>
-          
-
-
 </body>
+<div class="d-flex flex-content justify-content-center flex-wrap">
+<?php
+
+        foreach($cataleg as $row):
+        ?>
+    
+                <?php if ($row->disponible == 1){?>
+                    <?}else{?>
+                    <?}?>
+                <div class="card border-dark mt-5 mr-5 ml-5" style="width: 18rem;">
+                <img src="<? echo $row->imagen?>" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo $row->titulo;?></h5>
+                    <p class="card-text"><?php echo $row->resumen;?></p>
+                    <a href="#" class="btn btn-primary">Reservar</a>
+                </div>
+        </div>
+        <?php
+          endforeach;
+        ?>
+</div>
 

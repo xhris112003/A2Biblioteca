@@ -4,7 +4,7 @@ namespace App\Models;
 use App\Database\QueryBuilder;
 use App\Container;
 
-abstract class  Model {
+class  Model {
   protected QueryBuilder $qb;
   protected string $table;
   //array de claus-valors
@@ -40,11 +40,19 @@ abstract class  Model {
   }
   
   function persist(){
-      $this->qb->insert($this->data)->exec();
+      if($this->data){
+       try{
+        $this->qb->insert($this->data)->exec();
+        return true;
+      }catch(\Exception $e){
+         return false;
+      }  
+    }
   }
     
   function getAll(){
-    $items= $this->qb->select(['*'])->from($this->table)->exec()->fetch();
+    $items= $this->qb->select(['*'])->from('usuaris')->exec()->fetch();
+    
     return $items;
   }
   function find($condition){
@@ -56,6 +64,14 @@ abstract class  Model {
     //return $this->qb->exec()->fetch()[0];
     
   }
+  function findAll(){
+    $items= $this->qb->select(['*'])->from($this->table)->exec()->fetch();
+    return $items;
+    //$this->qb->setStmt($this->qb->query($this->qb->getQuery()));
+    //return $this->qb->exec()->fetch()[0];
+    
+  }
+
 
   function remove(int $id){
     $this->qb->delete($id);

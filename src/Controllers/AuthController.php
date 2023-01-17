@@ -31,7 +31,7 @@
     
     private function auth(string $username,string $passwd){
       //$password=password_hash($passwd,PASSWORD_BCRYPT,['cost'=>4]);
-       $res=$this->qb->select(['*'])->from('usuario')
+       $res=$this->qb->select(['*'])->from('usuaris')
         ->where(['username'=>$username])->limit(1)->exec()->fetch();
       
 
@@ -55,26 +55,50 @@
     }
     
     function signup(){
+      $username=$this->request->post('username'); 
       $email=$this->request->post('email');   
       $passwd=$this->request->post('passwd');
-      $username=$this->request->post('username');
       $password=password_hash($passwd,PASSWORD_BCRYPT,['cost'=>4]);
       $rol_id='2';
-      $data=['email'=>$email,
-        'username'=>$username,
+      $data=['username'=>$username,
+        'email'=>$email,
         'passwd'=>$password,
         'rol_id'=>$rol_id];
+      
       $user=new Usuari($data);
       //persist on DB
-      
+    
         if($user->persist()){
           $this->redirect('/');
+        };
+    }
+
+    function registerAdmin(){
+      $username=$this->request->post('username'); 
+      $email=$this->request->post('email');   
+      $passwd=$this->request->post('passwd');
+      $password=password_hash($passwd,PASSWORD_BCRYPT,['cost'=>4]);
+      $rol_id='1';
+      $data=['username'=>$username,
+        'email'=>$email,
+        'passwd'=>$password,
+        'rol_id'=>$rol_id];
+      
+      $user=new Usuari($data);
+      //persist on DB
+    
+        if($user->persist()){
+          $this->redirect('/list');
         };
     }
     
     function logout(){
       $this->session->destroy();
       $this->redirect('/');
+    }
+
+    function goBack(){
+      $this->redirect('/dashboard');
     }
     
   }

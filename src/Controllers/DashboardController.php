@@ -14,8 +14,8 @@ use App\Models\Usuari;
     protected Usuari $user;
     function __construct(Request $request,Session $session){
       parent::__construct($request,$session);
-      $user=new Usuari(Session::get('user'));
-      $this->user=$user;
+      //$user=new Usuari(Session::get('user'));
+      //$this->user=$user;
     }
 
     public function index()
@@ -23,7 +23,7 @@ use App\Models\Usuari;
       $user=Session::get('user');
       //primer obtenir dades
       $llibres=new Llibre();
-      $cataleg=$llibres->find(['disponible'=>true]);    
+      $cataleg=$llibres->findAll();    
      //$cataleg=$this->qb->select(['*'])->from('llibres')->exec()->fetch();
       return view('dashboard', ['cataleg'=>$cataleg,'user'=>$user]); 
     }

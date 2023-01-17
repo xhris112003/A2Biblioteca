@@ -40,7 +40,8 @@
       $list=implode(',',$fields);
       $this->query[]=$sql.$list; 
       return $this; 
-    } 
+    }
+    
     
     function insert($data=[]):self{
       $k=array_keys($data);

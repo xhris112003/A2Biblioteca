@@ -1,22 +1,16 @@
 <?php
 
-  namespace App\Models;
-  use App\Models\Usuari;
-  use App\Models\Llibre;
+namespace App\Models;
 
-  class Prestec extends Model{
-    protected $llibres=[];
-    protected Usuari $user;
-    public function __construct(Usuari $user,Llibre $llibres){
-      parent::__construct();
-      
-      $this->user=$user;
-       $this->llibres[]=$llibres;
-    } 
-    public function active(){
-      
-    }
-    public function user(){
-      return $this->belongsTo(Usuari::class);
-    }
-  }
+class Prestec extends Model{
+  protected string $Usuario_id;
+  protected string $Libro_isbn;
+  protected string $fechaInicio;
+
+  public function __construct($data){
+    parent::__construct($data);
+    $this->Usuario_id = $data['Usuario_id'];
+    $this->Libro_isbn = $data['Libro_isbn'];
+    
+  } 
+}

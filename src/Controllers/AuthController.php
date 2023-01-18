@@ -24,6 +24,10 @@
     }
     function signin(){
       //capturar elements de POST
+      if ($_SESSION["user"]->id == 0)
+      {
+        $this->redirect('/');
+      }
       $username=$this->request->post('username');   
       $passwd=$this->request->post('passwd');
       //crida al metode privat d'autenticació
@@ -47,8 +51,10 @@
               $this->redirect('/dashboard');
             }else{
               $this->session->set('error',"Sessión fallida");
-              $this->redirect('/home');
-            }     
+              $this->redirect('/');
+            }
+            
+
           }
       
       

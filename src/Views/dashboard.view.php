@@ -41,20 +41,67 @@
         ?>
     
                 <?php if ($row->disponible == 1){?>
-                    <?}else{?>
-                    <?}?>
-                <div class="card border-dark mt-5 mr-5 ml-5" style="width: 18rem;">
-                <img src="<? echo $row->imagen?>" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title"><?php echo $row->titulo;?></h5>
-                    <p class="card-text"><?php echo $row->resumen;?></p>
-                    <a href="Dashboard/prestec" class="btn btn-primary">Reservar</a>
+                <div class="card border-dark mt-5 mr-5 ml-5" style="width: 16rem;">
+                    <img src="<? echo $row->imagen?>" class="card-img-top">
+                    <div class="card-body" style="background-color: #b3ff9f;">
+                        <h5 class="card-title"><?php echo $row->titulo;?></h5>
+                        <p class="card-text"><?php echo $row->resumen;?></p>
+                        <p class="card-text">🟢Disponible</p>
+                        <button id='reservar' class="btn btn-primary" data-isbn="<?php echo $row->isbn;?>" data-id="<?php echo $row->id;?>">Reservar</button>
+                    </div>
                 </div>
-        </div>
+                    <?}else{?>
+                        <div class="card border-dark mt-5 mr-5 ml-5" style="width: 16rem;">
+                            <img src="<? echo $row->imagen?>" class="card-img-top">
+                            <div class="card-body" style="background-color: #ff997a;">
+                                <h5 class="card-title"><?php echo $row->titulo;?></h5>
+                                <p class="card-text"><?php echo $row->resumen;?></p>
+                                <p class="card-text">🔴No disponible</p>
+                                <button id='devolver' class="btn btn-primary" data-id="<?php echo $row->id;?>">Devolver</button>
+                            </div>
+                        </div>
+                    <?}?>
+                
         <?php
           endforeach;
         ?>
 </div>
+<script>
+    document.querySelectorAll('button').forEach(function(button) { button.addEventListener('click', function() { var id = this.getAttribute('data-id'); var isbn = this.getAttribute('data-isbn');}); });
+    $('#reservar').click(function() {
+    // Recoger la id del botón
+    var id = $(this).data('id');
+    var isbn = $(this).data('isbn');
+    
+    // Realizar la petición AJAX
+    $.ajax({
+        url: 'dashboard/reserva',
+        type: 'post',
+        data: {id: id,isbn: isbn},
+        success: function(response) {
+        // Procesar la respuesta del servidor
+        console.log(response);
+        location.reload();
+        }
+    });
+    });
+    $('#devolver').click(function() {
+    // Recoger la id del botón
+    var id = $(this).data('id');
+    
+    // Realizar la petición AJAX
+    $.ajax({
+        url: 'dashboard/devolver',
+        type: 'post',
+        data: {id: id},
+        success: function(response) {
+        // Procesar la respuesta del servidor
+        console.log(response);
+        location.reload();
+        }
+    });
+    });
+</script>
 
 
 

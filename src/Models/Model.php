@@ -30,13 +30,25 @@ class  Model {
        $this->data=$data;  
     }
   }
+  public function getId() {
+    return $this->id;
+  }
+  public function getData() {
+    return $this->data;
+  }
+  public function setData($data) {
+    $this->data = $data;
+  }
+  public function setId($id) {
+    $this->id = $id;
+  }
   public function get():array{
     return $this->data;
   }
   
   
   function save(){
-    $this->qb->update($this->table,$data);
+    $this->qb->update($this->table,$this->data,$this->id);
   }
   
   function persist(){

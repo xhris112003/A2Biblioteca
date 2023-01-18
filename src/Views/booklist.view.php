@@ -20,20 +20,12 @@
 <div class="container"><br/><br/>
     <div class="row">
         <div class="col-lg-10">
-            <h2>Users list!</h2>
+            <h2>Book list!</h2>
         </div>
         <div class="col-lg-2">
-            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-              Add New Admin
-            </button>
             <br/><br/>
-            <a type="button" href="auth/goBack"class="btn btn-outline-dark">
+            <a type="button" href="/list"class="btn btn-outline-dark">
               Return
-            </a>
-        </div>
-        <div class="col-lg-2">
-            <a type="button" href="dashboard/bookList"class="btn btn-outline-success">
-              Book list
             </a>
         </div>
         
@@ -43,21 +35,21 @@
         <thead>
             <tr>
                 <th>id</th>
-                <th>Username</th>
-                <th>Email</th>  
-                <th>Password</th>
+                <th>Isbn</th>
+                <th>Resumen</th>  
+                <th>Formato</th>
                 <th width="280px">Action</th>
             </tr>
         </thead>  
         <tbody>
        <?php      
-        foreach($data as $row):
+        foreach($cataleg as $row):
         ?>
         <tr id="<?php echo $row->id; ?>">
           <td><?php echo $row->id; ?></td>
-          <td><?php echo $row->username; ?></td>
-          <td><?php echo $row->email; ?></td>
-          <td><?php echo $row->passwd; ?></td>
+          <td><?php echo $row->isbn; ?></td>
+          <td><?php echo $row->resumen; ?></td>
+          <td><?php echo $row->formato; ?></td>
           <td>
             <a data-id="<?php echo $row->id; ?>" class="btn btn-warning btnEdit"><i class="fa fa-pencil-square-o"></i></a>
             <a data-id="<?php echo $row->id; ?>" class="btn btn-danger btnDelete"><i class="fa fa-trash"></i></a>
@@ -72,36 +64,7 @@
 
 </div>
 </body>
-<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add AdminUser</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form id="addUser" name="addUser" action="/auth/registerAdmin" method="post">
-      <div class="modal-body">
-          <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" class="form-control" id="username" placeholder="Enter Name" name="username">
-          </div>
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="text" class="form-control" id="email" placeholder="Enter Email" name="email">
-          </div>
-          <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter Password" name="password">
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
+
 <script>
   $(document).ready(function () {
       $('#tableUser').DataTable();

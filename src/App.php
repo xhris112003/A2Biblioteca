@@ -4,10 +4,13 @@ namespace App;
 
 use App\Request;
 use App\Session;
+use App\Container;
+use App\ServiceProvider;
 
   final class App{
      protected Request $request;
      protected Session $session;
+     protected Container $services;
 
     function __construct(){
       //iniciar sessió
@@ -16,6 +19,7 @@ use App\Session;
       $this->request= new Request();
       $controller=$this->request->getController();
       $action=$this->request->getAction();
+      $this->services=new Container(new ServiceProvider);
       //var_dump($controller);
       //var_dump($action);
       $this->dispatch($controller);
@@ -33,6 +37,7 @@ use App\Session;
           call_user_func([$objContr,$action]);
         }
         else{
+          Session::set('error','OoopS!! no ho trobo!');
           call_user_func([$objContr,'error']);
         }
       }catch(\Exception $e){

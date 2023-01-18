@@ -48,7 +48,7 @@
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $row->titulo;?></h5>
                     <p class="card-text"><?php echo $row->resumen;?></p>
-                    <a href="#" class="btn btn-primary">Reservar</a>
+                    <a href="Dashboard/prestec" class="btn btn-primary">Reservar</a>
                 </div>
         </div>
         <?php

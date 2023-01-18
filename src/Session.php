@@ -23,8 +23,8 @@
          *
          * @return mixed|null Returns the value on success. NULL if the key doesn't exist.
          */
-        public function get($key) {
-            if(array_key_exists($key, $_SESSION)) {
+        public static function get($key) {
+            if(array_key_exists($key,$_SESSION)) {
                 return $_SESSION[$key];
             }
             return null;
@@ -36,7 +36,7 @@
          * @param string $key
          * @param mixed  $value
          */
-        public function set($key, $value) {
+        public static function set($key, $value) {
             $_SESSION[$key] = $value;
         }
         public function unset($key){
@@ -52,7 +52,7 @@
          *
          * @return bool
          */
-        public function delete($key) {
+        public static function delete($key) {
             if(array_key_exists($key, $_SESSION)) {
                 unset($_SESSION[$key]);
                 return true;
@@ -67,11 +67,11 @@
          *
          * @return bool
          */
-        public function exists($key) {
+        public static function exists($key) {
             return array_key_exists($key, $_SESSION);
         }
 
-        public function destroy(){
+        public  static function destroy(){
             session_destroy();
         }
     

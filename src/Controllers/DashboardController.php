@@ -27,20 +27,36 @@ use App\Models\Usuari;
      //$cataleg=$this->qb->select(['*'])->from('llibres')->exec()->fetch();
       return view('dashboard', ['cataleg'=>$cataleg,'user'=>$user]); 
     }
+    public function bookList()
+    {
+      $user=Session::get('user');
+      //primer obtenir dades
+      $llibres=new Llibre();
+      $cataleg=$llibres->findAll();    
+      return view('booklist', ['cataleg'=>$cataleg,'user'=>$user]); 
+    }
    function reserva(){
-     $id=$this->request->getParams();
+     $user=Session::get('user');
+     $id=$this->request->getParams();  
      $llibre=(new Llibre())->find(['id'=>$id])[0];
-    
-     return view('reserva',['llibre'=>$llibre,
-                 'user'=>$this->user]);
+    var_dump($llibre);
+                                                                
+     return view('dashboard',['llibre'=>$llibre,
+     'user'=>$user]);
    }
     
   function prestec(){
       //crear prèstec
-       $id=$this->request->getParams();
-       $llibre=(new Llibre())->find(['id'=>$id])[0];
-     
-       $prestec=new Prestec($this->user, $llibre);
+    $llibres=new Llibre();
+    $cataleg=$llibres->findAll(); 
+    $id=$cataleg[0]->id;
+    $llibre=new Llibre();
+    $book=$llibre->find(['id'=>$id]);  
+     $data=(array)$book;
+     $llibre->setData($data);
+     $llibre->setDisponible(false);
+     $prestec=new Prestec($this->user, $llibre);
+     $prestec->save();
       
         
     }

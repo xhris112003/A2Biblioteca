@@ -60,6 +60,7 @@ class  Model {
     $v=array_values($condition);
     $items= $this->qb->select(['*'])->from($this->table)->where([$k[0]=>$v[0]])->exec()->fetch();
     return $items;
+    
     //$this->qb->setStmt($this->qb->query($this->qb->getQuery()));
     //return $this->qb->exec()->fetch()[0];
     

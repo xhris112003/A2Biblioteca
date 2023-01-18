@@ -6,7 +6,8 @@
   use App\Session;
   use App\Container;
   use App\Models\Model;
-  use App\Models\Usuari; 
+  use App\Models\Usuari;
+  use App\Models\Llibre;
 
 
   final class AuthController extends Controller{
@@ -88,6 +89,33 @@
       //persist on DB
     
         if($user->persist()){
+          $this->redirect('/list');
+        };
+    }
+
+    function registerBook(){
+      $isbn=$this->request->post('isbn'); 
+      $titulo=$this->request->post('titulo');   
+      $resumen=$this->request->post('resumen');
+      $edicion=$this->request->post('edicion');
+      $formato=$this->request->post('formato');
+      $imagen=$this->request->post('imagen');
+      $disponible=$this->request->post('disponible');
+
+      $data=['isbn'=>$isbn,
+        'titulo'=>$titulo,
+        'resumen'=>$resumen,
+        'edicion'=>$edicion,
+        'formato'=>$formato,
+        'imagen'=>$imagen,
+        'disponible'=>$disponible];
+      
+      $user=new Llibre($data);
+      //persist on DB
+      var_dump($user);
+      die();
+        if($user->persist()){
+          
           $this->redirect('/list');
         };
     }

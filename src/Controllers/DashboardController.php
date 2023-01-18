@@ -27,6 +27,14 @@ use App\Models\Usuari;
      //$cataleg=$this->qb->select(['*'])->from('llibres')->exec()->fetch();
       return view('dashboard', ['cataleg'=>$cataleg,'user'=>$user]); 
     }
+    
+    public function profile()
+    {
+      $user=Session::get('user');
+      
+      return view('header') .view('profile', ['user'=>$user]);
+    }
+
     public function bookList()
     {
       $user=Session::get('user');

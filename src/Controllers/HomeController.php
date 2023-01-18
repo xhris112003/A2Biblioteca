@@ -16,6 +16,8 @@ final class HomeController{
    // return view();
   }
 
+  
+
   public function error(){
     echo "error";
   }

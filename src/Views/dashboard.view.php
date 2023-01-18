@@ -24,7 +24,7 @@
                         <?php echo $_SESSION["user"]->username;?>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item text-center" href="#">Profile</a>
+                        <a class="dropdown-item text-center" href="dashboard/profile">Profile</a>
                         <a class="dropdown-item text-center" href="auth/logout" >Logout</a>
                         <?php if ($_SESSION['user']->rol_id == 1){?>
                         <a class="dropdown-item text-center hidden" href="/list" >Admin Profile</a>

@@ -32,19 +32,10 @@ use App\Models\Model;
       $llibres=new Llibre();
       $cataleg=$llibres->findAll();   
      //$cataleg=$this->qb->select(['*'])->from('llibres')->exec()->fetch();
+
       return view('dashboard', ['cataleg'=>$cataleg,'user'=>$user]); 
     }
     
-    public function profile()
-    {
-      if ($_SESSION["user"]->id == 0)
-      {
-        $this->redirect('/');
-      }
-      $user=Session::get('user');
-      
-      return view('header') .view('profile', ['user'=>$user]);
-    }
 
     public function bookList()
     {
@@ -111,11 +102,5 @@ use App\Models\Model;
     
   }
 
-  function go_reserva (){
-    $llibres=new Llibre();
-      $cataleg=$llibres->findAll();   
-     //$cataleg=$this->qb->select(['*'])->from('llibres')->exec()->fetch();
-      return view('reservas', ['cataleg'=>$cataleg,'user'=>$user]); 
-  }
     
   }

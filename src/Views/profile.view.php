@@ -1,5 +1,4 @@
-
-
+<?php include 'partials/header.view.php';?>
     <section class="seccion-perfil-usuario">
         <div class="perfil-usuario-portada">
           <div class="perfil-usuario-avatar">
@@ -31,8 +30,16 @@
           </div>
           <div>
         <ul class="lista-datos">
-          <p>Libro </p>
-          <p>Libro </p>
+        <?php
+
+          foreach($prestec as $row):
+        ?>
+        <?php if ($row->Usuario_id == $_SESSION["user"]->id){?>
+        <p style="font-size:small;"><?= $row->Libro_isbn?></p>
+        <?}?>
+        <?php
+          endforeach;
+        ?>
         </ul>
       </div>
    
@@ -45,4 +52,22 @@
   </body>
   
 </html>
+<script>
+  $(document).on('click', '#devolver', function() {
+    var isbn = $(this).data('isbn');
+    // Aquí puedes enviar una petición ajax para actualizar el estado de disponibilidad del libro correspondiente
+    $.ajax({
+        url: '/dashboard/devolver', // Dirección del script que realizará la actualización
+        type: 'POST',
+        data: {
+            isbn: isbn
+        },
+        success: function (data) {
+            // Aquí puedes manejar la respuesta del servidor
+            console.log(data);
+            location.reload();
+        }
+    });
+    });
+</script>
 <?php include 'partials/style.view.php';?>

@@ -36,6 +36,21 @@ use App\Models\Model;
       return view('dashboard', ['cataleg'=>$cataleg,'user'=>$user]); 
     }
     
+<<<<<<< Updated upstream
+=======
+    public function profile()
+    {
+      if ($_SESSION["user"]->id == 0)
+      {
+        $this->redirect('/');
+      }
+      $user=Session::get('user');
+      $prestec=new Prestec();
+      $prestecs=$prestec->findAll(); 
+      
+      return view('header') .view('profile', ['prestecs'=>$prestecs,'user'=>$user]);
+    }
+>>>>>>> Stashed changes
 
     public function bookList()
     {
@@ -76,7 +91,7 @@ use App\Models\Model;
         'Libro_isbn'=>$Libro_isbn];
       $prestec = new Prestec($data);
       $prestec->persist();
-   }
+  } 
    function devolver(){
     // Recoger la id enviada por AJAX
     $user=Session::get('user');

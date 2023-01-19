@@ -13,7 +13,24 @@
     
     function __construct($pdo){
       $this->pdo=$pdo;
+      
     }
+    public function execMultiple() {
+      //iniciar la transacción en la base de datos
+      $this->pdo->beginTransaction();
+      try{
+          //ejecutar varias consultas en la transacción
+          $this->query($this->query1);
+          $this->query($this->query2);
+          //confirmar la transacción
+          $this->pdo->commit();
+      }catch(\PDOException $e){
+          //si alguna de las consultas falla, deshacer todas las consultas
+          $this->pdo->rollback();
+          throw $e;
+      }
+    }
+
     function setTable($table){
       $this->table=$table;
     }

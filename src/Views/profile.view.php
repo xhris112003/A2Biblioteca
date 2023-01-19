@@ -32,12 +32,19 @@
         <ul class="lista-datos">
         <?php
 
+<<<<<<< Updated upstream
           foreach($prestec as $row):
         ?>
         <?php if ($row->Usuario_id == $_SESSION["user"]->id){?>
         <p style="font-size:small;"><?= $row->Libro_isbn?></p>
         <?}?>
         <?php
+=======
+        foreach($prestecs as $row):
+        ?>
+          <p><?= $row->Libro_isbn;?></p>
+          <?php
+>>>>>>> Stashed changes
           endforeach;
         ?>
         </ul>

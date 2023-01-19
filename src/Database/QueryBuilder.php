@@ -206,7 +206,7 @@
 
             function remove($tbl,$id){
                 
-              $sql="DELETE FROM {$tbl} WHERE id='{$id}'";
+              $sql="DELETE FROM {$tbl} WHERE Libro_isbn='{$id}'";
               $stmt=$this->query($sql);
               $res=$stmt->execute();
               if($res){

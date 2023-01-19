@@ -64,25 +64,19 @@ use App\Models\Model;
     }
    function reserva(){
       // Recoger la id enviada por AJAX
-      $user=Session::get('user');
+      
       $id = $_POST['id'];
       $isbn = $_POST['isbn'];
-
-      
-      
       // Validar y limpiar la id antes de utilizarla
       $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
       $isbn = filter_var($isbn, FILTER_SANITIZE_NUMBER_INT);
-      
       // Instanciar la clase correspondiente al modelo
       $model = new Llibre();
-      
       
       //Asignar el id y los datos necesarios para actualizar
       $model->setId($id);
       $model->setData(array("disponible" => 0));
       $model->save();
-      
       
       $Usuario_id = $_SESSION['user']->id;
       $Libro_isbn= $isbn;
@@ -92,48 +86,36 @@ use App\Models\Model;
       $prestec = new Prestec($data);
       $prestec->persist();
    }
-
    function devolver(){
     // Recoger la id enviada por AJAX
     $user=Session::get('user');
     $id = $_POST['id'];
+    $isbn = $_POST['isbn'];
     // Validar y limpiar la id antes de utilizarla
-    $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
-    
+    $id2 = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+    $isbn2 = filter_var($isbn, FILTER_SANITIZE_NUMBER_INT);
     // Instanciar la clase correspondiente al modelo
     $model = new Llibre();
     //Asignar el id y los datos necesarios para actualizar
     $model->setId($id);
     $model->setData(array("disponible" => 1));
     $model->save();
-    $id2="83";
-    $Usuario_id = "1";
-    $Libro_isbn="2910025552799";
+    $Usuario_id = $_SESSION['user']->id;
+    $Libro_isbn= $isbn;
     $data=[
       'Usuario_id'=>$Usuario_id,
       'Libro_isbn'=>$Libro_isbn];
     $prestamo = new Prestec($data);
-    $prestamo->delete($id2);
+    $prestamo->delete($Libro_isbn);
 
     
- }
-    
-  function prestec(){
-      //crear prèstec
+  }
+
+  function go_reserva (){
     $llibres=new Llibre();
-    $cataleg=$llibres->findAll(); 
-    $id=$cataleg[0]->id;
-    $llibre=new Llibre();
-    $book=$llibre->find(['id'=>$id]);  
-    $data=(array)$book;
-    $llibre->setData($data);
-    $llibre->setDisponible(false);
-    $prestec=new Prestec($this->user, $llibre);
-    $prestec->save();
-      
-    }
+      $cataleg=$llibres->findAll();   
+     //$cataleg=$this->qb->select(['*'])->from('llibres')->exec()->fetch();
+      return view('reservas', ['cataleg'=>$cataleg,'user'=>$user]); 
+  }
     
-    function prestecs(){
-      echo "prestecs";
-    }
   }

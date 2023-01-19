@@ -26,6 +26,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item text-center" href="dashboard/profile">Profile</a>
                         <a class="dropdown-item text-center" href="auth/logout" >Logout</a>
+                        <a class="dropdown-item text-center" href="dashboard/go_reserva" >Reservas</a>
                         <?php if ($_SESSION['user']->rol_id == 1){?>
                         <a class="dropdown-item text-center hidden" href="/list" >Admin Profile</a>
                         <?}?>
@@ -47,7 +48,7 @@
                         <h5 class="card-title"><?php echo $row->titulo;?></h5>
                         <p class="card-text"><?php echo $row->resumen;?></p>
                         <p class="card-text">🟢Disponible</p>
-                        <button id='reservar' class="btn btn-primary" data-isbn="<?php echo $row->isbn;?>" data-id="<?php echo $row->id;?>">Reservar</button>
+                        <button id='reservar' class="btn btn-primary" data-isbn="<?= $row->isbn;?>" data-id="<?= $row->id;?>">Reservar</button>
                     </div>
                 </div>
                     <?}else{?>
@@ -57,7 +58,7 @@
                                 <h5 class="card-title"><?php echo $row->titulo;?></h5>
                                 <p class="card-text"><?php echo $row->resumen;?></p>
                                 <p class="card-text">🔴No disponible</p>
-                                <button id='devolver' class="btn btn-primary" data-id="<?php echo $row->id;?>">Devolver</button>
+                                <button id='devolver' class="btn btn-primary" data-isbn="<?= $row->isbn;?>" data-id="<?= $row->id;?>">Devolver</button>
                             </div>
                         </div>
                     <?}?>
@@ -67,37 +68,39 @@
         ?>
 </div>
 <script>
-    document.querySelectorAll('button').forEach(function(button) { button.addEventListener('click', function() { var id = this.getAttribute('data-id'); var isbn = this.getAttribute('data-isbn');}); });
-    $('#reservar').click(function() {
-    // Recoger la id del botón
+   $(document).on('click', '#reservar', function() {
     var id = $(this).data('id');
     var isbn = $(this).data('isbn');
-    
-    // Realizar la petición AJAX
+    // Aquí puedes enviar una petición ajax para actualizar el estado de disponibilidad del libro correspondiente
     $.ajax({
-        url: 'dashboard/reserva',
-        type: 'post',
-        data: {id: id,isbn: isbn},
-        success: function(response) {
-        // Procesar la respuesta del servidor
-        console.log(response);
-        location.reload();
+        url: '/dashboard/reserva', // Dirección del script que realizará la actualización
+        type: 'POST',
+        data: {
+            id: id,
+            isbn: isbn
+        },
+        success: function (data) {
+            // Aquí puedes manejar la respuesta del servidor
+            console.log(data);
+            location.reload();
         }
     });
     });
-    $('#devolver').click(function() {
-    // Recoger la id del botón
+    $(document).on('click', '#devolver', function() {
     var id = $(this).data('id');
-    
-    // Realizar la petición AJAX
+    var isbn = $(this).data('isbn');
+    // Aquí puedes enviar una petición ajax para actualizar el estado de disponibilidad del libro correspondiente
     $.ajax({
-        url: 'dashboard/devolver',
-        type: 'post',
-        data: {id: id},
-        success: function(response) {
-        // Procesar la respuesta del servidor
-        console.log(response);
-        location.reload();
+        url: '/dashboard/devolver', // Dirección del script que realizará la actualización
+        type: 'POST',
+        data: {
+            id: id,
+            isbn: isbn
+        },
+        success: function (data) {
+            // Aquí puedes manejar la respuesta del servidor
+            console.log(data);
+            location.reload();
         }
     });
     });

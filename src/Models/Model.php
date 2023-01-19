@@ -84,16 +84,19 @@ class  Model {
     //return $this->qb->exec()->fetch()[0];
     
   }
-
-
-  function remove(int $id){
-    $this->qb->delete($id);
+  public function delete(int $id) {
+    $this->qb->remove("prestecs", $id);
   }
+
+  
   // de l'objecte actual, extreu la pertinença 
   //user_id
   function belongsTo(Obj $obj){
     return $obj;
   }
+
+  // de l'objecte actual, extreu la pertinença 
+  //user_id
 
   function hasMany(Obj $obj,string $foreign_field){
     $table2=strtolower((new \ReflectionClass($obj))->getShortName()).'s';

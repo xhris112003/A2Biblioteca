@@ -106,6 +106,15 @@ use App\Models\Model;
     $model->setId($id);
     $model->setData(array("disponible" => 1));
     $model->save();
+    $id2="83";
+    $Usuario_id = "1";
+    $Libro_isbn="2910025552799";
+    $data=[
+      'Usuario_id'=>$Usuario_id,
+      'Libro_isbn'=>$Libro_isbn];
+    $prestamo = new Prestec($data);
+    $prestamo->delete($id2);
+
     
  }
     

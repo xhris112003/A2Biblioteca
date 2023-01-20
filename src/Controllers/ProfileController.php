@@ -28,7 +28,7 @@ final class ProfileController extends Controller{
       }
       $user=Session::get('user');
       
-      $prestec=$this->qb->select(['*'])->from('prestecs')->limit(1)->exec()->fetch();   
+      $prestec=$this->qb->select(['*'])->from('prestecs')->exec()->fetch();   
       
       return view('header') .view('profile', ['prestec'=>$prestec,'user'=>$user]);
     }

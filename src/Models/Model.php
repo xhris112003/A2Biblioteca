@@ -82,6 +82,9 @@ class  Model {
   public function delete(int $id) {
     $this->qb->remove("prestecs", $id);
   }
+  public function delete_reg(int $id) {
+    $this->qb->remove_reg($this->table, $id);
+  }
 
   
   // de l'objecte actual, extreu la pertinença 

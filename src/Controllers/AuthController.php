@@ -31,7 +31,9 @@
       $username=$this->request->post('username');   
       $passwd=$this->request->post('passwd');
       //crida al metode privat d'autenticació
-      $this->auth($username,$passwd);  
+      $this->auth($username,$passwd);
+      
+
     }
     
     private function auth(string $username,string $passwd){

@@ -52,7 +52,7 @@
           <td><?php echo $row->formato; ?></td>
           <td>
             <a data-id="<?php echo $row->id; ?>" class="btn btn-warning btnEdit"><i class="fa fa-pencil-square-o"></i></a>
-            <a data-id="<?php echo $row->id; ?>" class="btn btn-danger btnDelete"><i class="fa fa-trash"></i></a>
+            <a id="borrar" data-id="<?php echo $row->id; ?>" class="btn btn-danger btnDelete"><i class="fa fa-trash"></i></a>
           </td>
         </tr>
         <?php
@@ -70,5 +70,21 @@
       $('#tableUser').DataTable();
 
   });
+  $(document).on('click', '#borrar', function() {
+    var id = $(this).data('id');
+    // Aquí puedes enviar una petición ajax para actualizar el estado de disponibilidad del libro correspondiente
+    $.ajax({
+        url: '/dashboard/borrar_registros2', // Dirección del script que realizará la actualización
+        type: 'POST',
+        data: {
+            id: id,
+        },
+        success: function (data) {
+            // Aquí puedes manejar la respuesta del servidor
+            console.log(data);
+            location.reload();
+        }
+    });
+    });
   
 </script>

@@ -57,7 +57,9 @@
                                 <h5 class="card-title"><?php echo $row->titulo;?></h5>
                                 <p class="card-text"><?php echo $row->resumen;?></p>
                                 <p class="card-text">🔴No disponible</p>
-                                <button id='devolver' class="btn btn-primary" data-isbn="<?= $row->isbn;?>" data-id="<?= $row->id;?>">Devolver</button>
+                                <?php if ($row->id_Usuario == $_SESSION['user']->id) { ?>
+                                    <button id='devolver' class="btn btn-primary" data-isbn="<?= $row->isbn;?>" data-id="<?= $row->id;?>">Devolver</button>
+                                <?php } ?>
                             </div>
                         </div>
                     <?}?>

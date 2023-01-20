@@ -32,25 +32,11 @@ use App\Models\Model;
       $llibres=new Llibre();
       $cataleg=$llibres->findAll();   
      //$cataleg=$this->qb->select(['*'])->from('llibres')->exec()->fetch();
+      
 
       return view('dashboard', ['cataleg'=>$cataleg,'user'=>$user]); 
     }
     
-<<<<<<< Updated upstream
-=======
-    public function profile()
-    {
-      if ($_SESSION["user"]->id == 0)
-      {
-        $this->redirect('/');
-      }
-      $user=Session::get('user');
-      $prestec=new Prestec();
-      $prestecs=$prestec->findAll(); 
-      
-      return view('header') .view('profile', ['prestecs'=>$prestecs,'user'=>$user]);
-    }
->>>>>>> Stashed changes
 
     public function bookList()
     {
@@ -70,7 +56,6 @@ use App\Models\Model;
     }
    function reserva(){
       // Recoger la id enviada por AJAX
-      
       $id = $_POST['id'];
       $isbn = $_POST['isbn'];
       // Validar y limpiar la id antes de utilizarla
@@ -81,7 +66,8 @@ use App\Models\Model;
       
       //Asignar el id y los datos necesarios para actualizar
       $model->setId($id);
-      $model->setData(array("disponible" => 0));
+      $model->setData(array("disponible" => 0,"id_Usuario"=>$_SESSION['user']->id));
+      
       $model->save();
       
       $Usuario_id = $_SESSION['user']->id;
@@ -104,7 +90,7 @@ use App\Models\Model;
     $model = new Llibre();
     //Asignar el id y los datos necesarios para actualizar
     $model->setId($id);
-    $model->setData(array("disponible" => 1));
+    $model->setData(array("disponible" =>1,"id_Usuario"=>0));
     $model->save();
     $Usuario_id = $_SESSION['user']->id;
     $Libro_isbn= $isbn;
@@ -113,8 +99,29 @@ use App\Models\Model;
       'Libro_isbn'=>$Libro_isbn];
     $prestamo = new Prestec($data);
     $prestamo->delete($Libro_isbn);
-
     
+  }
+  function borrar_registros(){
+    $user=Session::get('user');
+    $id2 = $_POST['id'];;
+    
+    $rol_id=$_SESSION['user']->rol_id;
+    $username = $_SESSION['user']->username;
+    $email = $_SESSION['user']->email;
+    $password = $_SESSION['user']->passwd;
+    $data=['username'=>$username,
+      'email'=>$email,
+      'passwd'=>$password,
+      'rol_id'=>$rol_id];
+    
+    $user = new Usuari($data);
+    $user->delete_reg($id2);
+  }
+  function borrar_registros2(){
+    $id2 = $_POST['id'];;
+    
+    $user = new Llibre($data);
+    $user->delete_reg($id2);
   }
 
     
